@@ -67,6 +67,47 @@
       radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212,160,160,0.2) 0%, transparent 60%);
   }
   .hero-ornament { width: 2px; height: 60px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); margin: 0 auto 1.5rem; animation: fadeIn 2s ease forwards; }
+
+  /* --- CIRCULAR GLOWING IMAGE WITH FLOATING & SWAYING --- */
+  .hero-image-circle {
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(201,169,110,0.7), 0 0 60px rgba(201,169,110,0.4), 0 0 100px rgba(201,169,110,0.2);
+    margin: 0 auto 1.5rem;
+    animation: float 4s ease-in-out infinite, sway 6s ease-in-out infinite;
+    transition: box-shadow 0.3s ease;
+    flex-shrink: 0;
+  }
+  .hero-image-circle:hover {
+    box-shadow: 0 0 50px rgba(201,169,110,0.9), 0 0 80px rgba(201,169,110,0.6), 0 0 120px rgba(201,169,110,0.3);
+  }
+  .hero-image-circle img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.02);
+    transition: transform 0.5s ease;
+  }
+  .hero-image-circle:hover img {
+    transform: scale(1.08);
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes sway {
+    0% { transform: rotateY(-10deg) rotateX(3deg); }
+    50% { transform: rotateY(10deg) rotateX(-3deg); }
+    100% { transform: rotateY(-10deg) rotateX(3deg); }
+  }
+
+  @media (max-width: 560px) {
+    .hero-image-circle {
+      width: 120px; height: 120px;
+    }
+  }
+
   .hero-label { font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: slideUp 1s ease 0.3s forwards; }
   .hero-names { font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 12vw, 9rem); line-height: 1.05; color: var(--deep); margin-bottom: 0.5rem; opacity: 0; animation: slideUp 1.2s ease 0.5s forwards; text-shadow: 2px 4px 20px rgba(58,42,26,0.1); }
   .hero-and { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 3vw, 1.5rem); font-style: italic; color: var(--gold); letter-spacing: 0.3em; margin: 0.3rem 0; opacity: 0; animation: slideUp 1s ease 0.7s forwards; }
@@ -104,7 +145,6 @@
   }
   .detail-card:hover { transform: translateY(-4px) !important; box-shadow: 0 12px 40px rgba(201,169,110,0.25); }
   .detail-card.visible { opacity: 1; transform: translateY(0); }
-  /* Venue card clickable styles */
   .detail-card.venue-card { cursor: pointer; position: relative; overflow: hidden; }
   .detail-card.venue-card::after {
     content: ''; position: absolute; inset: 0;
@@ -185,7 +225,6 @@
   [dir="rtl"] .loc-directions::before { transform: translateX(100%); }
   [dir="rtl"] .loc-directions:hover::before { transform: translateX(0); }
 
-  /* Click ripple on venue card */
   .loc-card-tap-hint {
     display: block; font-family: 'Cinzel', serif; font-size: 0.72rem;
     letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase;
@@ -229,6 +268,15 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-ornament"></div>
+
+  <!-- ===== CIRCULAR GLOWING IMAGE ===== -->
+  <div class="hero-image-circle">
+    <!-- Image is in the SAME folder as index.html -->
+    <img src="image_1.jpg" alt="Eyad & Yomna" loading="lazy">
+    <!-- If your file is .png, .webp, etc., change the extension above.
+         If it's exactly "image_1" without extension, rename it to image_1.jpg or adjust src. -->
+  </div>
+
   <p class="hero-label" data-en="The Wedding of" data-ar="حفل زفاف">The Wedding of</p>
   <div class="hero-names"><span data-en="Eyad" data-ar="إياد">Eyad</span></div>
   <div class="hero-and" data-en="&amp;" data-ar="و">&amp;</div>
@@ -355,7 +403,6 @@
       <div class="loc-info-row" style="margin-top:0.5rem; color:var(--mauve); font-size:1.15rem;">
         <span data-en="Friday, August 7, 2026  ·  6:00 PM" data-ar="الجمعة، ٧ أغسطس ٢٠٢٦  ·  السادسة مساءً">Friday, August 7, 2026  ·  6:00 PM</span>
       </div>
-      <!-- Directions button — prevent double-navigation since card is already a link -->
       <div class="loc-directions" onclick="event.preventDefault();window.open('https://maps.app.goo.gl/dhD2XBJMmyChY4Vm7?g_st=iw','_blank')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
         <span data-en="GET DIRECTIONS" data-ar="احصل على الاتجاهات">GET DIRECTIONS</span>
